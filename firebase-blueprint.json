@@ -1,0 +1,79 @@
+{
+  "entities": {
+    "Personnel": {
+      "title": "Personnel",
+      "description": "Employee entity with QR code badge details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "matricule": { "type": "string" },
+        "nom": { "type": "string" },
+        "prenom": { "type": "string" },
+        "poste": { "type": "string" },
+        "departement": { "type": "string" },
+        "email": { "type": "string" },
+        "telephone": { "type": "string" },
+        "photoUrl": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["matricule", "nom", "prenom", "poste"]
+    },
+    "Produit": {
+      "title": "Produit",
+      "description": "Product or equipment in inventory with barcode",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "nom": { "type": "string" },
+        "reference": { "type": "string" },
+        "categorie": { "type": "string" },
+        "codeBarre": { "type": "string" },
+        "quantite": { "type": "number" },
+        "seuilAlerte": { "type": "number" },
+        "emplacement": { "type": "string" },
+        "description": { "type": "string" },
+        "prixUnitaire": { "type": "number" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["nom", "reference", "codeBarre", "quantite", "emplacement"]
+    },
+    "MouvementStock": {
+      "title": "MouvementStock",
+      "description": "Stock transaction audit record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "date": { "type": "string" },
+        "type": { "type": "string", "enum": ["entree", "sortie"] },
+        "sousType": { "type": "string" },
+        "employeId": { "type": "string" },
+        "employeNom": { "type": "string" },
+        "employeMatricule": { "type": "string" },
+        "produitId": { "type": "string" },
+        "produitNom": { "type": "string" },
+        "produitReference": { "type": "string" },
+        "quantite": { "type": "number" },
+        "notes": { "type": "string" },
+        "operateur": { "type": "string" },
+        "dateRetourPrevue": { "type": "string" },
+        "statutRetour": { "type": "string" }
+      },
+      "required": ["type", "employeId", "produitId", "quantite", "operateur", "date"]
+    }
+  },
+  "firestore": {
+    "/personnel/{personnelId}": {
+      "schema": { "$ref": "#/entities/Personnel" },
+      "description": "Collection of company staff and employees with unique QR code badges"
+    },
+    "/produits/{produitId}": {
+      "schema": { "$ref": "#/entities/Produit" },
+      "description": "Inventory catalog of equipment and products with barcode numbers"
+    },
+    "/mouvements_stock/{mouvementId}": {
+      "schema": { "$ref": "#/entities/MouvementStock" },
+      "description": "Chronological audit trail of all inventory entries, exits and loans"
+    }
+  }
+}

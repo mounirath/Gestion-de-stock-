@@ -1,0 +1,6 @@
+{
+  "name": "ScanStock - Gestion de Stock & Matériel",
+  "description": "Application complète de gestion de stock et de matériel avec identification par QR Code et traçabilité par Code-Barres.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
